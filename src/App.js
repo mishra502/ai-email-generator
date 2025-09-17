@@ -21,7 +21,7 @@ function App() {
     }
 
     try {
-      const response = await fetch('https://ai-email-generator-z3dw.onrender.com/api/generate-email', {
+      const response = await fetch('https://ai-email-generator-psi.vercel.app/api/generate-email', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt, recipient, subject }),
