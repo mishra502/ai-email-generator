@@ -29,6 +29,10 @@ def generate_email():
     if not prompt or not recipient or not subject:
         return jsonify({"error": "All fields are required"}), 400
 
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({"message": "Backend is running ✅"}), 200
+
     # Debug logs
     print("🟢 Incoming request:")
     print("  Recipient:", recipient)
