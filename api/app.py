@@ -18,7 +18,12 @@ model = genai.GenerativeModel(model_name="gemini-2.5-flash")
 EMAIL_USER = os.getenv("EMAIL_USER")
 EMAIL_PASS = os.getenv("EMAIL_PASS")
 
-# 🔽 Replace your old function with this one
+# This is the home route
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({"message": "Backend is running ✅"}), 200
+
+# This is the email generation and sending route
 @app.route("/api/generate-email", methods=["POST"])
 def generate_email():
     data = request.get_json()
@@ -29,11 +34,7 @@ def generate_email():
     if not prompt or not recipient or not subject:
         return jsonify({"error": "All fields are required"}), 400
 
-@app.route("/", methods=["GET"])
-def home():
-    return jsonify({"message": "Backend is running ✅"}), 200
-
-    # Debug logs
+    # Debug logs (now reachable)
     print("🟢 Incoming request:")
     print("  Recipient:", recipient)
     print("  Subject:", subject)
@@ -87,9 +88,6 @@ AI Email Generator
         print("❌ Failed to send email:", e)
 
     return jsonify({"email_body": generated_email})
-
-if __name__ == "__main__":
-    app.run(debug=True, port=5000)
 
 
 
