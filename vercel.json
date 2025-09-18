@@ -2,15 +2,15 @@
   "version": 2,
   "builds": [
     {
+      "src": "api/app.py",
+      "use": "@vercel/python"
+    },
+    {
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "build"
       }
-    },
-    {
-      "src": "api/*.py",
-      "use": "@vercel/python"
     }
   ],
   "routes": [
@@ -19,8 +19,20 @@
       "dest": "/api/app.py"
     },
     {
+      "src": "/static/(.*)",
+      "dest": "/build/static/$1"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/build/favicon.ico"
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "/build/manifest.json"
+    },
+    {
       "src": "/(.*)",
-      "dest": "index.html"
+      "dest": "/build/index.html"
     }
   ]
 }
